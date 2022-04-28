@@ -1,4 +1,4 @@
-import { NotImplementedError } from '../extensions/index.js';
+const { NotImplementedError } = require('../extensions/index.js');
 
 const MODERN_ACTIVITY = 15;
 const HALF_LIFE_PERIOD = 5730;
@@ -36,3 +36,7 @@ export default function dateSample(sampleActivity) {
     t =  Math.ceil(t);
     return t <= 0 ? false : t; 
 }
+
+module.exports = {
+  dateSample
+};

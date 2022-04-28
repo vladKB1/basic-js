@@ -1,4 +1,4 @@
-import { NotImplementedError } from '../extensions/index.js';
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Extract season from given date and expose the enemy scout!
@@ -33,3 +33,7 @@ export default function getSeason(date) {
         return 'autumn';
     } 
 }
+
+module.exports = {
+  getSeason
+};
