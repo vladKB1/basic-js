@@ -1,4 +1,4 @@
-import { NotImplementedError } from '../extensions/index.js';
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Implement class DepthCalculator with method calculateDepth
@@ -22,7 +22,40 @@ export default class DepthCalculator {
                 ans = Math.max(ans, this.calculateDepth(arr[i]) + 1);
             }
         }
-        return ans;
+        return ans; IsN
     }
+    
 }
+
+
+function sortByBit(arr) {
+    arr.sort((a, b) => {
+      let aa = calcBits(a);
+      let bb = calcBits(b);
+      if (aa > bb) {
+        return 1;
+      } else 
+      if (aa === bb) {
+        if (a > b) {
+          return 1;
+        } else {
+          return -1;
+        }
+      } else {
+        return -1;
+      }
+    })
+    
+    return arr;
+  }
+  
+  function calcBits(x) {
+    let ans = 0;
+    while (x != 0) {
+      if (x % 2 === 1) ans++;
+      x = Math.trunc(x / 2);
+    }
+  }
+
+console.log(sortByBit([3, 8, 3, 6, 5, 7, 9, 1]));
 
