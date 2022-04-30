@@ -14,9 +14,9 @@ const { NotImplementedError } = require('../extensions/index.js');
  * calculateHanoi(9, 4308) => { turns: 511, seconds: 427 }
  *
  */
-export default function calculateHanoi(disksNumber, turnsSpeed) {
-    let turns =  2 ** disksNumber - 1;
-    return {turns: turns, seconds: Math.floor(3600 / turnsSpeed * turns) }
+function calculateHanoi(disksNumber, turnsSpeed) {
+  let turns = 2 ** disksNumber - 1;
+  return { turns: turns, seconds: Math.floor(3600 / turnsSpeed * turns) }
 }
 
 module.exports = {

@@ -14,15 +14,15 @@ const { NotImplementedError } = require('../extensions/index.js');
  * ]) => 3`
  *
  */
-export default function countCats(a) {  
-    let x = 0;
-    for (let i = 0; i < a.length; i++) {
-        for (let j = 0; j < a[i].length; j++) {
-            if (a[i][j] === '^^') x++;
-        }
+function countCats(a) {
+  let x = 0;
+  for (let i = 0; i < a.length; i++) {
+    for (let j = 0; j < a[i].length; j++) {
+      if (a[i][j] === '^^') x++;
     }
+  }
 
-    return x;
+  return x;
 }
 
 module.exports = {

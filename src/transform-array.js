@@ -13,7 +13,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-export default function transform(arr) { 
+function transform(arr) {
     console.log(arr);
 
     if (!Array.isArray(arr)) {
@@ -32,32 +32,32 @@ export default function transform(arr) {
                     ans.splice(i + 1, 1);
 
                 }
-            } 
-        } else
-        if (ans[i] === '--discard-prev') {
-            if (i - 1 >= 0) {
-                if (typeof ans[i - 1] != 'string') {
-                    ans.splice(i - 1, 1);
-                    i--;
-                }
             }
         } else
-        if (ans[i] === '--double-next') {
-            if (i + 1 < ans.length) {
-                if (typeof ans[i + 1] != 'string') {
-                    ans.splice(i + 1, 0, ans[i + 1]);            
+            if (ans[i] === '--discard-prev') {
+                if (i - 1 >= 0) {
+                    if (typeof ans[i - 1] != 'string') {
+                        ans.splice(i - 1, 1);
+                        i--;
+                    }
                 }
-            }
-        } else 
-        if (ans[i] === '--double-prev') {
-            if (i - 1 >= 0) {
-                if (typeof ans[i - 1] != 'string') {
-                    ans.splice(i - 1, 0, ans[i - 1]);
-                    i++;
-                }
-            }
-        }
-    }    
+            } else
+                if (ans[i] === '--double-next') {
+                    if (i + 1 < ans.length) {
+                        if (typeof ans[i + 1] != 'string') {
+                            ans.splice(i + 1, 0, ans[i + 1]);
+                        }
+                    }
+                } else
+                    if (ans[i] === '--double-prev') {
+                        if (i - 1 >= 0) {
+                            if (typeof ans[i - 1] != 'string') {
+                                ans.splice(i - 1, 0, ans[i - 1]);
+                                i++;
+                            }
+                        }
+                    }
+    }
 
     for (let i = 0; i < ans.length; i++) {
         if (typeof ans[i] === 'string') {
@@ -71,5 +71,5 @@ export default function transform(arr) {
 }
 
 module.exports = {
-  transform
+    transform
 };

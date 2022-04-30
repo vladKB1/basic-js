@@ -11,29 +11,29 @@ const { NotImplementedError } = require('../extensions/index.js');
  * getSeason(new Date(2020, 02, 31)) => 'spring'
  * 
  */
-export default function getSeason(date) {
+function getSeason(date) {
     if (date === null || date === undefined) {
         return 'Unable to determine the time of year!';
-    }    
-    
-    if (!(date instanceof Date) ||  Object.keys(date).length !== 0) {
+    }
+
+    if (!(date instanceof Date) || Object.keys(date).length !== 0) {
         throw new Error('Invalid date!');
     }
 
     let month = date.getMonth();
     if (month <= 1 || month === 11) {
         return 'winter';
-    } else 
-    if (month <= 4) {
-        return 'spring';
     } else
-    if (month <= 7) {
-        return 'summer';
-    } else {
-        return 'autumn';
-    } 
+        if (month <= 4) {
+            return 'spring';
+        } else
+            if (month <= 7) {
+                return 'summer';
+            } else {
+                return 'autumn';
+            }
 }
 
 module.exports = {
-  getSeason
+    getSeason
 };
