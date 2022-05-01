@@ -13,6 +13,19 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
+
+function check(item) {
+    const special = ['--double-next', '--double-prev', '--discard-prev', '--discard-next'];
+
+    for (let i = 0; i < special.length; i++) {
+        if (item === special[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 function transform(arr) {
     console.log(arr);
 
@@ -20,48 +33,37 @@ function transform(arr) {
         throw new Error("'arr' parameter must be an instance of the Array!");
     }
 
-    if (arr instanceof Number) {
-        arr = new Array(arr);
-    }
+    let ans = JSON.parse(JSON.stringify(arr));
 
-    let ans = arr.slice();
     for (let i = 0; i < ans.length; i++) {
-        if (ans[i] === '--discard-next') {
-            if (i + 1 < ans.length) {
-                if (typeof ans[i + 1] != 'string') {
-                    ans.splice(i + 1, 1);
-
-                }
+        switch (ans[i]) {
+            case '--discard-next': {
+                if (i + 1 < ans.length && check(ans[i + 1])) ans.splice(i + 1, 1);
+                break;
             }
-        } else
-            if (ans[i] === '--discard-prev') {
-                if (i - 1 >= 0) {
-                    if (typeof ans[i - 1] != 'string') {
-                        ans.splice(i - 1, 1);
-                        i--;
-                    }
+            case '--discard-prev': {
+                if (i - 1 >= 0 && check(ans[i - 1])) {
+                    ans.splice(i - 1, 1);
+                    i--;
                 }
-            } else
-                if (ans[i] === '--double-next') {
-                    if (i + 1 < ans.length) {
-                        if (typeof ans[i + 1] != 'string') {
-                            ans.splice(i + 1, 0, ans[i + 1]);
-                        }
-                    }
-                } else
-                    if (ans[i] === '--double-prev') {
-                        if (i - 1 >= 0) {
-                            if (typeof ans[i - 1] != 'string') {
-                                ans.splice(i - 1, 0, ans[i - 1]);
-                                i++;
-                            }
-                        }
-                    }
+                break;
+            }
+            case '--double-next': {
+                if (i + 1 < ans.length && check(ans[i + 1])) ans.splice(i + 1, 0, ans[i + 1]);
+                break;
+            }
+            case '--double-prev': {
+                if (i - 1 >= 0 && check(ans[i - 1])) {
+                    ans.splice(i - 1, 0, ans[i - 1]);
+                    i++;
+                }
+                break;
+            }
+        }
     }
 
     for (let i = 0; i < ans.length; i++) {
-        if (typeof ans[i] === 'string') {
-            //console.log(i);
+        if (!check(ans[i])) {
             ans.splice(i, 1);
             i--;
         }
@@ -73,3 +75,5 @@ function transform(arr) {
 module.exports = {
     transform
 };
+
+console.log(transform(['--discrard-prev', 4]));

@@ -32,3 +32,7 @@ function createDreamTeam(members) {
 
   return ans === '' ? false : ans;
 }
+
+module.exports = {
+  createDreamTeam
+}
